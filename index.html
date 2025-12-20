@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+
+
+<head>
+
+    <meta name="google-site-verification" content="zvZ7aIG0GUvwbh92vuKdsyhU2CsWd0HfGkSXdy1UPV8" />
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="Code Galaxy - Interactive platform for learning programming languages. Explore the universe of coding with our solar system visualization.">
+
+    <meta name="keywords" content="programming, coding, learn to code, JavaScript, Python, HTML, CSS, interactive learning">
+
+    <meta name="author" content="Code Galaxy">
+
+    <title>Code Galaxy - Programming Languages Universe</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="codegalaxy.css">
+
+    <link rel="stylesheet" href="stars.css">
+
+    <script  defer  src="stars.js"></script>
+
+    <link rel="stylesheet" href="header.css">
+
+    <script defer src="codegalaxy.js"></script>
+
+</head>
+
+
+
+<body>
+
+
+
+    <div class="stars-container" id="starsContainer"></div>
+
+
+
+
+
+
+
+<div id="planet-modal" role="dialog" aria-labelledby="modal-title" aria-modal="true">
+
+   
+
+    <div class="modal-content">
+
+        <h2 id="modal-title"></h2>
+
+        <p id="modal-desc"></p>
+
+        <button onclick="closeModal()" aria-label="Close modal">Close</button>
+
+    </div>
+
+</div>
+
+
+
+    <div class="main">
+
+        <p class="title">
+
+            welcome to the
+
+            <br>
+
+            <span>CODE</span>
+
+            GALAXY
+
+        </p>
+
+        <p class="subtitle">
+
+            Explore the Universe of Programming Languages
+
+        </p>
+
+    </div>
+
+    <div class="pagetwo">
+
+        <div class="header">
+
+        <div class="logo-container">
+
+            <a href="index.html" class="logo-link">
+
+                <img src="logo.jpg" alt="Code Galaxy Logo" class="logo">
+
+            </a>
+
+            <span> <span class="code">CODE</span> GALAXY</span>
+
+        </div>
+
+            <div class="buttons">
+
+                <a class="button"  id="get-started"  href="codegalaxypagetwo.html">Get Started</a>
+
+                <a class="button" href="#">Sign in</a>
+
+                <a class="button" href="#">Support</a>
+
+                <a class="button" href="#">Testimonials</a>
+
+               
+
+            </div >
+
+            </div>
+
+            <h1 id="h1">
+
+                    Interactive Map of Programming Languages
+
+                </h1>
+
+            <div class="solar-system">
+
+               
+
+                <div class="sun"></div>
+
+                <div class="orbit orbit1"></div>
+
+                <div class="orbit orbit2"></div>
+
+                <div class="orbit orbit3"></div>
+
+                <div class="orbit orbit4"></div>
+
+                <div class="orbit orbit5"></div>
+
+                <div class="orbit orbit6"></div>
+
+                <div class="orbit orbit7"></div>
+
+                <div class="orbit orbit8"></div>
+
+
+
+                <div class="planet planet1 pos1" role="button" tabindex="0" aria-label="JavaScript planet - Click to learn more"><span>JavaScript</span></div>
+
+                <div class="planet planet2 pos2" role="button" tabindex="0" aria-label="Python planet - Click to learn more"><span>Python</span></div>
+
+                <div class="planet planet3 pos3" role="button" tabindex="0" aria-label="HTML planet - Click to learn more"><span>HTML</span></div>
+
+                <div class="planet planet4 pos4" role="button" tabindex="0" aria-label="C++ planet - Click to learn more"><span>C++</span></div>
+
+                <div class="planet planet5 pos5" role="button" tabindex="0" aria-label="Java planet - Click to learn more"><span>Java</span></div>
+
+                <div class="planet planet6 pos6" role="button" tabindex="0" aria-label="CSS planet - Click to learn more"><span>CSS</span></div>
+
+                <div class="planet planet7 pos7" role="button" tabindex="0" aria-label="Go planet - Click to learn more"><span>Go</span></div>
+
+                <div class="planet planet8 pos8" role="button" tabindex="0" aria-label="Rust planet - Click to learn more"><span>Rust</span></div>
+
+            </div>
+
+        </div>
+
+
+
+<footer>
+
+  <center>
+
+      <p>
+
+        🌌 CODE GALAXY - User Guide
+
+Welcome to Code Galaxy!
+
+An interactive platform for learning programming languages through solar system visualization.
+
+      </p>
+
+
+
+<p>
+
+    🎮 Controls
+
+Mouse   <br>
+
+Click on planet — open programming language information   <br>
+
+Hover over planet — planet scales up (hover effect)   <br>
+
+Click outside popup — close popup window   <br>
+
+Keyboard   <br>
+
+← Left Arrow — select previous planet  <br>
+
+→ Right Arrow — select next planet   v    <br>
+
+Enter — open modal window for selected planetv    <br>
+
+Escape — close modal windowv    <br>
+
+A — rotate solar system left by 15°v    <br>
+
+D — rotate solar system right by 15°v    <br>
+
+Space — open planet information (when planet is in focus)v    <br>
+
+</p>
+
+
+
+<p>
+
+     🌍 Planets (Programming Languages)  <br>
+
+Each planet represents a programming language:  <br>
+
+
+
+Planet Language Color Description  <br>
+
+🔵 JavaScript Blue Web development language for interactive sites  <br>
+
+🟡 Python Yellow Popular for AI, data science, and scripting
+
+🔴 HTML Red Foundation of web pages  <br>
+
+🔷 C++ Blue Powerful for systems and games  <br>
+
+🟤 Java Brown For enterprise applications and Android  <br>
+
+🟣 CSS Purple Styles and layouts for web pages  <br>
+
+🔷 Go Light Blue Efficient for cloud and backend  <br>
+
+🟫 Rust Brown-Gold Safe and fast for systems  <br>
+
+</p>
+
+
+
+<p>
+
+    📱 Site Navigation  <br>
+
+Top Menu  <br>
+
+Get Started — begin learning (link to codegalaxypagetwo.html)  <br>
+
+Sign in — log into account  <br>
+
+Support — technical support  <br>
+
+Testimonials — user reviews  <br>
+
+Logo
+
+Click on logo in top left corner to return to home page
+
+</p>
+
+
+
+<p>
+
+✨ Interactive Features   <br>
+
+1. Modal Window   <br>
+
+When clicking on a planet, a central window opens with information:   <br>
+
+
+
+Programming language name   <br>
+
+Brief description   <br>
+
+"Close" button   <br>
+
+2. Popup Tooltips   <br>
+
+When clicking, a compact tooltip appears near the cursor:   <br>
+
+
+
+Language name   <br>
+
+Detailed description   <br>
+
+"Close" button   <br>
+
+3. Animations   <br>
+
+Planets rotate around the "sun" at different speeds   <br>
+
+Hover effect — planets scale up on hover   <br>
+
+Smooth transitions between screens   <br>
+
+</p>
+
+
+
+<p>
+
+    🎯 Usage Tips    <br>
+
+For Beginners   <br>
+
+Hover your cursor over any planet to see its name   <br>
+
+Click to learn more about the language   <br>
+
+Use A/D keys to rotate the system — makes it easier to explore all planets   <br>
+
+For Advanced Users   <br>
+
+Use arrows + Enter for quick navigation without mouse   <br>
+
+Escape always closes active windows   <br>
+
+Rotate the system with A/D keys for better overview   <br>
+
+</p>
+
+
+
+<p  style="font-size: 1.5em;">
+
+    Happy learning in CODE GALAXY! 🚀✨
+
+
+
+</p>
+
+
+
+  </center>
+
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html> 

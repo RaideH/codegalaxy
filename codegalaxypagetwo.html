@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn programming online with Code Galaxy. Interactive courses for HTML, CSS, JavaScript, React, and more.">
+    <meta name="keywords" content="learn programming, HTML tutorial, CSS tutorial, JavaScript tutorial, React, web development courses">
+    <meta name="author" content="Code Galaxy">
+    <title>Code Galaxy - Learn Programming Online</title>
+    
+    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="codegalaxypagetwo.css">
+    <link rel="stylesheet" href="stars.css">
+    
+    <script defer src="stars.js"></script>
+    <script defer src="codegalaxypagetwo.js"></script>
+</head>
+
+<body>
+    <div class="stars-container" id="starsContainer"></div>
+
+    <header class="header">
+        <div class="logo-container">
+            <a href="index.html" class="logo-link">
+                <img src="logo.jpg" alt="Code Galaxy Logo" class="logo" loading="lazy">
+            </a>
+            <span><span class="code accent">CODE</span> GALAXY</span>
+        </div>
+        <nav class="buttons">
+            <a class="button" href="#" id="sign-in" role="button">Sign in</a>
+            <a class="button" href="#">Support</a>
+            <a class="button" href="#">Testimonials</a>
+        </nav>
+    </header>
+
+    <div id="signin-box">
+        <h2 class="accent">Registration</h2>
+        <form action="" id="input-form">
+         
+            <input type="text" name="name" id="name-inp" class="inputs" placeholder="First Name" required>
+            <input type="text" name="surname" id="surname-inp" class="inputs" placeholder="Last Name" required>
+            <input type="text" name="nickname" id="nickname-inp" class="inputs" placeholder="Username" required>
+            <input type="email" name="email" id="email-inp" class="inputs" placeholder="Email Address" required>
+            <input type="password" name="password" id="password-inp" class="inputs" placeholder="Password" required>
+            
+            <button type="submit" id="but-inpform" class="button">Submit</button>
+        </form>
+    </div>
+
+    <main>
+        <section class="titl">
+            <h1 class="Title accent">Learn Programming Online</h1>
+            <p class="Subtitle">Start learning to code with our interactive courses and tutorials.</p>
+        </section>
+
+        <section class="html" aria-labelledby="html-title">
+            <div class="section-left">
+                <h2 id="html-title" class="section-title">HTML</h2>
+                <p class="section-desc">The main markup language for structuring web pages.</p>
+                <div class="section-card">
+                    <a class="card-button" href="learnhtml.html">Learn HTML</a>
+                    <a class="card-button" href="Interactive Code Editor.html">Write Code</a>
+                </div>
+            </div>
+            <div class="section-right">
+                <div class="code-card">
+                    <div class="code-header">
+                        <span class="circle red"></span>
+                        <span class="circle yellow"></span>
+                        <span class="circle green"></span>
+                        <span class="code-title">index.html</span>
+                    </div>
+                    <textarea class="code-area" readonly spellcheck="false">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sample Page</title>
+</head>
+<body>
+  <header>
+    <h1>Hello, World!</h1>
+  </header>
+  <main>
+    <p>Structuring the web.</p>
+  </main>
+</body>
+</html></textarea>
+                </div>
+            </div>
+        </section>
+
+        <section class="css" aria-labelledby="css-title">
+            <div class="section-left">
+                <h2 id="css-title" class="section-title">CSS</h2>
+                <p class="section-desc">Styling and defining beautiful interfaces.</p>
+                <div class="section-card">
+                    <a class="card-button" href="404.html">Learn CSS</a>
+                     <a class="card-button" href="Interactive Code Editor.html">Write Code</a>
+                </div>
+            </div>
+            <div class="section-right">
+                <div class="code-card">
+                    <div class="code-header">
+                        <span class="circle red"></span>
+                        <span class="circle yellow"></span>
+                        <span class="circle green"></span>
+                        <span class="code-title">style.css</span>
+                    </div>
+                    <textarea class="code-area" readonly spellcheck="false">
+.card {
+  width: 300px;
+  background-color: #24233b;
+  border-radius: 8px;
+  transition: 0.5s ease;
+}
+
+.card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0px 10px 20px black;
+}</textarea>
+                </div>
+            </div>
+        </section>
+
+        <section class="JS" aria-labelledby="js-title">
+            <div class="section-left">
+                <h2 id="js-title" class="section-title">JavaScript</h2>
+                <p class="section-desc">The engine behind web dynamics and logic.</p>
+                <div class="section-card">
+                    <a class="card-button" href="404.html">Learn JS</a>
+ <a class="card-button" href="Interactive Code Editor.html">Write Code</a>
+                </div>
+            </div>
+            <div class="section-right">
+                <div class="code-card">
+                    <div class="code-header">
+                        <span class="circle red"></span>
+                        <span class="circle yellow"></span>
+                        <span class="circle green"></span>
+                        <span class="code-title">app.js</span>
+                    </div>
+                    <textarea class="code-area" readonly spellcheck="false">
+const message = "Hello Universe!";
+console.log(message);
+
+function initStars() {
+  // Logic for your background stars
+  console.log("Stars initialized...");
+}</textarea>
+                </div>
+            </div>
+        </section>
+
+        <h2 class="accent" style="text-align: center; margin-top: 4rem;">Popular Technologies</h2>
+        <section class="frame" aria-label="Additional frameworks and technologies">
+            
+            <div class="tain fram">
+                <p class="tail fra">Tailwind CSS</p>
+                <p class="tech-desc">Utility-first CSS framework for quick styling.</p>
+                <div class="cards1">
+                    <a class="card-button1" href="#">Learn Tailwind</a>
+                </div>
+            </div>
+            
+            <div class="react fram">
+                <p class="reac fra">React</p>
+                <p class="tech-desc">A library for building component-based interfaces.</p>
+                <div class="cards1">
+                    <a class="card-button1" href="#">Learn React</a>
+                </div>
+            </div>
+            
+            <div class="bootstrap fram">
+                <p class="boot fra">Bootstrap</p>
+                <p class="tech-desc">Fast, responsive design with ready-to-use styles.</p>
+                <div class="cards1">
+                    <a class="card-button1" href="#">Learn Bootstrap</a>
+                </div>
+            </div>
+            
+            <div class="typescript fram">
+                <p class="type fra">TypeScript</p>
+                <p class="tech-desc">JavaScript with syntax for types to reduce bugs.</p>
+                <div class="cards1">
+                    <a class="card-button1" href="#">Learn TypeScript</a>
+                </div>
+            </div>
+            
+            <div class="next fram">
+                <p class="nextjs fra">NextJS</p>
+                <p class="tech-desc">The React framework for production-grade apps.</p>
+                <div class="cards1">
+                    <a class="card-button1" href="#">Learn NextJS</a>
+                </div>
+            </div>
+            
+            <div class="node fram">
+                <p class="nodejs fra">NodeJS</p>
+                <p class="tech-desc">JavaScript runtime built on Chrome's V8 engine.</p>
+                <div class="cards1">
+                    <a class="card-button1" href="#">Learn NodeJS</a>
+                </div>
+            </div>
+            
+        </section>
+    </main>
+
+    <footer style="padding: 2rem; text-align: center; color: var(--text-secondary);">
+        <p>&copy; 2025 Code Galaxy. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
