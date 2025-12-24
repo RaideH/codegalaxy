@@ -114,3 +114,78 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.querySelectorAll('section, .fram').forEach(el => observer.observe(el));
 });
+
+
+// =========================================
+// AI CHAT GALAXY ASSISTANT
+// =========================================
+document.addEventListener('DOMContentLoaded', function() {
+    const aiBtn = document.getElementById('ai-toggle-btn');
+    const aiBox = document.getElementById('ai-chat-box');
+    const aiSend = document.getElementById('ai-send-btn');
+    const aiInput = document.getElementById('ai-input');
+    const aiMessages = document.getElementById('ai-messages');
+
+    // КЛЮЧ: Используем тот, что вы дали первым (он самый полный)
+    const API_KEY = "";
+    
+    // ИСПРАВЛЕННЫЙ URL (v1beta + правильный путь)
+    const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+
+    if (aiBtn) {
+        aiBtn.onclick = () => {
+            aiBox.style.display = (aiBox.style.display === 'none' || aiBox.style.display === '') ? 'flex' : 'none';
+        };
+    }
+
+    async function sendToAI() {
+        const text = aiInput.value.trim();
+        if (!text) return;
+
+        // Добавляем сообщение пользователя
+        addMsg(text, 'user-msg');
+        aiInput.value = '';
+
+        const loaderId = "loader-" + Date.now();
+        addMsg("Thinking...", 'ai-msg', loaderId);
+
+        try {
+            const response = await fetch(API_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    contents: [{ parts: [{ text: text }] }]
+                })
+            });
+
+            const data = await response.json();
+            document.getElementById(loaderId)?.remove();
+
+            if (data.error) {
+                // Если снова 404, выведем подробности
+                addMsg("API Error: " + data.error.message, 'ai-msg');
+                console.error("Full Error:", data.error);
+            } else if (data.candidates) {
+                let botResponse = data.candidates[0].content.parts[0].text;
+                // Превращаем **текст** в жирный
+                botResponse = botResponse.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
+                addMsg(botResponse, 'ai-msg');
+            }
+        } catch (err) {
+            document.getElementById(loaderId)?.remove();
+            addMsg("Connection error! Run via Live Server.", 'ai-msg');
+        }
+    }
+
+    if (aiSend) aiSend.onclick = sendToAI;
+    if (aiInput) aiInput.onkeypress = (e) => { if(e.key === 'Enter') sendToAI(); };
+
+    function addMsg(text, type, id = null) {
+        const d = document.createElement('div');
+        d.className = "message " + type;
+        if(id) d.id = id;
+        d.innerHTML = text;
+        aiMessages.appendChild(d);
+        aiMessages.scrollTop = aiMessages.scrollHeight;
+    }
+});

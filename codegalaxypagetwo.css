@@ -557,3 +557,23 @@ section.JS {
         transform: none !important;
     }
 }
+.ai-widget-container { position: fixed; bottom: 20px; right: 20px; z-index: 9999; }
+.ai-button { 
+    width: 60px; height: 60px; border-radius: 50%; 
+    background: var(--accent-gradient); border: none; cursor: pointer;
+    color: var(--major); font-weight: bold; font-size: 1.2rem;
+}
+.ai-chat-box { 
+    position: absolute; bottom: 70px; right: 0; width: 320px; height: 450px;
+    background: var(--bg-primary); border: 2px solid var(--accent);
+    border-radius: 15px; display: none; flex-direction: column; overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+.ai-header { background: var(--bg-secondary); padding: 10px; color: var(--accent); font-weight: bold; display: flex; justify-content: space-between; }
+.ai-messages { flex: 1; padding: 15px; overflow-y: auto; color: white; display: flex; flex-direction: column; gap: 10px; }
+.message { padding: 8px 12px; border-radius: 10px; max-width: 85%; font-size: 0.9rem; line-height: 1.4; }
+.user-msg { align-self: flex-end; background: var(--accent); color: var(--major); font-weight: bold; }
+.ai-msg { align-self: flex-start; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); }
+.ai-input-area { padding: 10px; display: flex; gap: 5px; background: var(--bg-secondary); }
+#ai-input { flex: 1; background: #000; border: 1px solid var(--accent); color: white; padding: 8px; border-radius: 5px; }
+#ai-send-btn { background: var(--accent); border: none; padding: 0 15px; cursor: pointer; border-radius: 5px; font-weight: bold; }

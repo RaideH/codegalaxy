@@ -207,6 +207,35 @@ function initStars() {
         </section>
     </main>
 
+    <div class="ai-widget-container">
+    <button id="ai-toggle-btn" class="ai-button" aria-label="Open AI Chat">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+    </button>
+
+    <div id="ai-chat-box" class="ai-chat-box">
+        <div class="ai-header">
+            <span>Galaxy AI Assistant</span>
+            <button id="ai-close-btn" class="ai-close">&times;</button>
+        </div>
+        <div id="ai-messages" class="ai-messages">
+            <div class="message ai-message">
+                Hello! I am your coding assistant. Ask me anything about HTML, CSS, or JS! 🚀
+            </div>
+        </div>
+        <div class="ai-input-area">
+            <input type="text" id="ai-input" placeholder="Ask a question..." autocomplete="off">
+            <button id="ai-send-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
+
     <footer style="padding: 2rem; text-align: center; color: var(--text-secondary);">
         <p>&copy; 2025 Code Galaxy. All rights reserved.</p>
     </footer>
