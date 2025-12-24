@@ -30,25 +30,18 @@ let links = [
 `HTML Computercode`,
 `HTML Semantics`,
 `HTML Style Guide`,
-
 ]
 
 const content = document.getElementById('content');
 
 
-const fragment = document.createDocumentFragment();
+const fragment = document.createElement('ol');
 
-// 2. Используй 'let i' для правильного объявления переменной в цикле
 for(let i = 0; i < links.length; i++) {
-    let link = document.createElement('a');
-  let br = document.createElement('br');
-    link.href = '#';
-    link.className = 'lesson-link';
+    let link = document.createElement('li');
     link.innerText = links[i];
     
-    // 3. Добавляем все ссылки во "фрагмент", а не на страницу
-    fragment.append(link , br); 
+    fragment.append(link); 
 }
 
-// 4. Добавляем "фрагмент" со всеми ссылками на страницу ОДИН РАЗ
-content.append(fragment);
+content.appendchild(fragment);
