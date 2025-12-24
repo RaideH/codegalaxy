@@ -1,4 +1,20 @@
-// --- Optimization utilities ---
+// =========================================
+// EMAILJS CONFIGURATION
+// =========================================
+const EMAILJS_CONFIG = {
+    publicKey: 'NpessLefRCM9SFBBM',        // Your Public Key from EmailJS
+    serviceID: 'service_rm0m2od',        // Your Email Service ID
+    templateID: 'template_gvlx7lg'       // Your Email Template ID
+};
+
+// Initialize EmailJS
+(function() {
+    emailjs.init(EMAILJS_CONFIG.publicKey);
+})();
+
+// =========================================
+// OPTIMIZATION UTILITIES
+// =========================================
 function throttle(func, limit) {
     let inThrottle;
     return function(...args) {
@@ -10,57 +26,156 @@ function throttle(func, limit) {
     };
 }
 
+// =========================================
+// MAIN APPLICATION LOGIC
+// =========================================
 document.addEventListener('DOMContentLoaded', function() {
     
-    // 1. Управление окном входа (Sign In)
+    // 1. Sign In Window Management
     const signinBtn = document.querySelector('#sign-in');
     const signinBox = document.querySelector('#signin-box');
 
     if (signinBtn && signinBox) {
         signinBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            // Исправлено: используем вычисляемый стиль, так как в CSS может быть display: none
             const currentDisplay = window.getComputedStyle(signinBox).display;
             signinBox.style.display = (currentDisplay === 'none') ? 'flex' : 'none';
         });
     }
 
-    // 2. Сохранение данных формы
+    // 2. Form Data Submission with EmailJS Integration
     const formBtn = document.querySelector('#but-inpform');
+    const inputForm = document.querySelector('#input-form');
     const nameInp = document.querySelector('#name-inp');
     const surnameInp = document.querySelector('#surname-inp'); 
     const nicknameInp = document.querySelector('#nickname-inp');
     const emailInp = document.querySelector('#email-inp');
     const passwordInp = document.querySelector('#password-inp');
 
-    if (formBtn) {
-        formBtn.addEventListener('click', (e) => {
-            e.preventDefault(); // Останавливаем перезагрузку страницы
+    // Create status message element
+    let statusMessage = document.querySelector('#status-message');
+    if (!statusMessage && signinBox) {
+        statusMessage = document.createElement('div');
+        statusMessage.id = 'status-message';
+        statusMessage.className = 'status-message';
+        signinBox.appendChild(statusMessage);
+    }
 
-            // Проверка на заполненность (базовая)
-            if(!nameInp.value || !emailInp.value) {
-                alert('Please fill in the main fields');
+    // Function to show status messages
+    function showStatusMessage(text, type) {
+        if (statusMessage) {
+            statusMessage.textContent = text;
+            statusMessage.className = `status-message ${type} show`;
+            
+            setTimeout(() => {
+                statusMessage.classList.remove('show');
+            }, 5000);
+        }
+    }
+
+    // Function to set button loading state
+    function setButtonLoading(isLoading) {
+        if (formBtn) {
+            if (isLoading) {
+                formBtn.disabled = true;
+                formBtn.textContent = 'Sending...';
+            } else {
+                formBtn.disabled = false;
+                formBtn.textContent = 'Submit';
+            }
+        }
+    }
+
+    if (formBtn && inputForm) {
+        // Prevent default form submission
+        inputForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+        });
+
+        formBtn.addEventListener('click', async (e) => {
+            e.preventDefault();
+
+            // Basic validation
+            if (!nameInp.value || !emailInp.value) {
+                alert('Please fill in the required fields');
                 return;
             }
 
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(emailInp.value)) {
+                alert('Please enter a valid email address');
+                return;
+            }
+
+            // Password validation (minimum 6 characters)
+            if (passwordInp.value.length < 6) {
+                alert('Password must be at least 6 characters long');
+                return;
+            }
+
+            // Check EmailJS configuration
+            if (EMAILJS_CONFIG.publicKey === 'YOUR_PUBLIC_KEY') {
+                showStatusMessage('⚠️ EmailJS is not configured! Please set up your keys.', 'error');
+                return;
+            }
+
+            // Create user object
             let user = {
-                name: nameInp.value,      // Исправлено: .value вместо .vale
+                name: nameInp.value,
                 surname: surnameInp.value,
-                nickname: nicknameInp.value, // Исправлено: nicknameInp вместо nickname
+                nickname: nicknameInp.value,
                 email: emailInp.value,
                 password: passwordInp.value
             };
 
-            // Используем временную метку для уникального ID, чтобы не сбрасывалось при перезагрузке
-            const uniqueId = Date.now();
-            localStorage.setItem(`user_${uniqueId}`, JSON.stringify(user)); // Исправлено: обратные кавычки
-            
-            alert('Successfully signed in!');
-            signinBox.style.display = 'none'; // Закрываем окно после успеха
+            // Prepare data for EmailJS (hide password in email)
+            const emailData = {
+                user_name: user.name,
+                user_surname: user.surname,
+                user_nickname: user.nickname,
+                user_email: user.email,
+                user_password: '***HIDDEN***', // Don't send password in plain text
+                registration_date: new Date().toLocaleString('en-US')
+            };
+
+            // Show loading state
+            setButtonLoading(true);
+
+            try {
+                // Send email via EmailJS
+                const response = await emailjs.send(
+                    EMAILJS_CONFIG.serviceID,
+                    EMAILJS_CONFIG.templateID,
+                    emailData
+                );
+
+                console.log('✅ Email sent successfully!', response.status, response.text);
+
+                // Save to localStorage with unique ID
+                const uniqueId = Date.now();
+                localStorage.setItem(`user_${uniqueId}`, JSON.stringify(user));
+                
+                showStatusMessage('✅ Registration successful! Email sent.', 'success');
+                
+                // Clear form
+                inputForm.reset();
+                
+                // Close sign-in box after 2 seconds
+                setTimeout(() => {
+                    if (signinBox) signinBox.style.display = 'none';
+                }, 2000);
+
+            } catch (error) {
+                console.error('❌ Email sending error:', error);
+                showStatusMessage('❌ Error sending email. Please try again.', 'error');
+            } finally {
+                setButtonLoading(false);
+            }
         });
     }
 
-    // 3. Копирование кода
+    // 3. Code Copy Functionality
     const codeAreas = document.querySelectorAll('textarea.code-area');
     codeAreas.forEach(area => {
         const copyBtn = document.createElement('button');
@@ -80,7 +195,7 @@ document.addEventListener('DOMContentLoaded', function() {
         area.parentNode.insertBefore(copyBtn, area.nextSibling);
     });
 
-    // 4. 3D Эффект для карточек (Throttle для производительности)
+    // 4. 3D Card Effect (Throttled for Performance)
     const cards = document.querySelectorAll('.fram');
     cards.forEach(card => {
         const handleMouseMove = throttle((e) => {
@@ -103,7 +218,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // 5. Intersection Observer для анимаций появления
+    // 5. Intersection Observer for Scroll Animations
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -113,8 +228,41 @@ document.addEventListener('DOMContentLoaded', function() {
     }, { threshold: 0.1 });
 
     document.querySelectorAll('section, .fram').forEach(el => observer.observe(el));
-});
 
+    // 6. Input Validation (Real-time)
+    
+    // Username validation (only letters, numbers, and underscore)
+    if (nicknameInp) {
+        nicknameInp.addEventListener('input', function() {
+            this.value = this.value.replace(/[^a-zA-Z0-9_]/g, '');
+        });
+    }
+
+    // Password strength indicator
+    if (passwordInp) {
+        passwordInp.addEventListener('input', function() {
+            if (this.value.length > 0 && this.value.length < 6) {
+                this.style.borderColor = '#dc3545';
+            } else if (this.value.length >= 6) {
+                this.style.borderColor = '#28a745';
+            } else {
+                this.style.borderColor = '#e0e0e0';
+            }
+        });
+    }
+
+    // Email validation indicator
+    if (emailInp) {
+        emailInp.addEventListener('blur', function() {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (this.value && !emailRegex.test(this.value)) {
+                this.style.borderColor = '#dc3545';
+            } else if (this.value) {
+                this.style.borderColor = '#28a745';
+            }
+        });
+    }
+});
 
 // =========================================
 // AI CHAT GALAXY ASSISTANT
@@ -126,10 +274,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const aiInput = document.getElementById('ai-input');
     const aiMessages = document.getElementById('ai-messages');
 
-    // КЛЮЧ: Используем тот, что вы дали первым (он самый полный)
+    // API KEY: Replace with your Gemini API key
     const API_KEY = "";
     
-    // ИСПРАВЛЕННЫЙ URL (v1beta + правильный путь)
+    // Corrected API URL
     const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
 
     if (aiBtn) {
@@ -142,7 +290,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const text = aiInput.value.trim();
         if (!text) return;
 
-        // Добавляем сообщение пользователя
+        // Add user message
         addMsg(text, 'user-msg');
         aiInput.value = '';
 
@@ -162,18 +310,18 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById(loaderId)?.remove();
 
             if (data.error) {
-                // Если снова 404, выведем подробности
                 addMsg("API Error: " + data.error.message, 'ai-msg');
                 console.error("Full Error:", data.error);
             } else if (data.candidates) {
                 let botResponse = data.candidates[0].content.parts[0].text;
-                // Превращаем **текст** в жирный
+                // Convert **text** to bold
                 botResponse = botResponse.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
                 addMsg(botResponse, 'ai-msg');
             }
         } catch (err) {
             document.getElementById(loaderId)?.remove();
-            addMsg("Connection error! Run via Live Server.", 'ai-msg');
+            addMsg("Connection error! Please check your API key and internet connection.", 'ai-msg');
+            console.error("Connection Error:", err);
         }
     }
 
