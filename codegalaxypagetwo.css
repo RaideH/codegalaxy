@@ -210,6 +210,7 @@ p {
 section.html, 
 section.css, 
 section.JS {
+    background: transparent;
     width: 100%;
     min-height: 60vh;
     display: flex;
@@ -614,4 +615,17 @@ section.JS {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+/* Close Button Styles */
+#close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    width: 24px;
+    height: 24px;
 }

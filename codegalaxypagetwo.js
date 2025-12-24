@@ -32,16 +32,24 @@ function throttle(func, limit) {
 document.addEventListener('DOMContentLoaded', function() {
     
     // 1. Sign In Window Management
+    const close = document.querySelector('#close')
     const signinBtn = document.querySelector('#sign-in');
     const signinBox = document.querySelector('#signin-box');
 
-    if (signinBtn && signinBox) {
+    if (signinBtn && signinBox && close) {
         signinBtn.addEventListener('click', (e) => {
             e.preventDefault();
             const currentDisplay = window.getComputedStyle(signinBox).display;
             signinBox.style.display = (currentDisplay === 'none') ? 'flex' : 'none';
         });
+
+        close.addEventListener('click', ()=>{
+
+            signinBox.style.display = 'none';
+        })
     }
+
+
 
     // 2. Form Data Submission with EmailJS Integration
     const formBtn = document.querySelector('#but-inpform');
@@ -337,3 +345,4 @@ document.addEventListener('DOMContentLoaded', function() {
         aiMessages.scrollTop = aiMessages.scrollHeight;
     }
 });
+
